@@ -146,11 +146,23 @@ async function main() {
     url: "https://localhost:8443/internal/members",
   });
   check(
-    "admin page lists members and payments",
+    "admin board lists members, payments and audit events",
     admin.status === 200 &&
       admin.text.includes("Members and payments") &&
+      admin.text.includes("Active memberships") &&
       admin.text.includes("Recent audit events"),
     `HTTP ${admin.status}`,
+  );
+
+  const library = await fetchText({
+    url: "https://localhost:8443/internal/library",
+  });
+  check(
+    "members' library opens for a paid member",
+    library.status === 200 &&
+      library.text.includes("Reading room") &&
+      library.text.includes("figures/fig2-lattice.svg"),
+    `HTTP ${library.status}`,
   );
 
   const withoutCert = await fetchText({

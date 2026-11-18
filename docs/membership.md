@@ -1,7 +1,7 @@
 # Membership and payment tool
 
 **Status:** working local prototype, verified 2026-11-17 (domain self-test 19/19,
-end-to-end 8/8, EVM verifier 4/4 against a mock node). \
+end-to-end 9/9, EVM verifier 4/4 against a mock node). \
 **Scope:** this repository (Next.js 15, App Router, no database), mirrored from
 `friendsofhilma_website` so the membership subsystem can be developed, tested
 and deployed independently. \
@@ -28,6 +28,7 @@ email address.
 | Purchase page + checkout UI                                     | `src/app/membership/`                                       |
 | Server actions (create intent, submit tx, verify)               | `src/app/membership/actions.ts`                             |
 | Admin: members, payments, grants, revocations, audit            | `src/app/internal/members/`                                 |
+| Members-only library (Cosmic Block plates)                      | `src/app/internal/library/`                                 |
 | Browser wallet helper (EIP-1193, no web3 library)               | `src/app/membership/wallet.ts`                              |
 | Dev self-tests                                                  | `src/app/api/membership/dev/*`                              |
 | Smoke tests                                                     | `tools/membership-smoke-test.mjs`, `tools/mock-evm-rpc.mjs` |
@@ -203,7 +204,8 @@ Pages:
 - `http://localhost:8080/membership` — public plan overview, purchase requires sign-in
 - `https://localhost:8443/membership` — checkout for a verified identity
 - `https://localhost:8443/internal` — member area (membership or admin required)
-- `https://localhost:8443/internal/members` — admin: members, payments, audit log
+- `https://localhost:8443/internal/members` - admin: members, payments, audit log
+- `https://localhost:8443/internal/library` - members-only reading room
 
 ### Development endpoints
 

@@ -85,6 +85,19 @@ export default async function MembersAdminPage({
   const pendingPayments = snapshot.payments.filter(
     (payment) => payment.status === "pending" || payment.status === "submitted",
   );
+  const activeMemberCount = snapshot.members.filter((member) =>
+    activeMembershipFor(member.id),
+  ).length;
+  const confirmedPayments = snapshot.payments.filter(
+    (payment) => payment.status === "confirmed",
+  );
+
+  const stats = [
+    { label: "Members", value: snapshot.members.length },
+    { label: "Active memberships", value: activeMemberCount },
+    { label: "Awaiting settlement", value: pendingPayments.length },
+    { label: "Confirmed payments", value: confirmedPayments.length },
+  ];
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-16">
@@ -102,6 +115,22 @@ export default async function MembersAdminPage({
         <code className="font-mono">{session.identity.subject}</code>. Every
         grant, revocation and verification is written to the audit log.
       </p>
+
+      <section className="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat) => (
+          <div key={stat.label} className="border border-black/15 p-5">
+            <p className="text-[11px] font-semibold tracking-[0.15em] text-neutral-500 uppercase">
+              {stat.label}
+            </p>
+            <p
+              className="mt-2 text-3xl"
+              style={{ fontFamily: "Georgia, 'Times New Roman', Times, serif" }}
+            >
+              {stat.value}
+            </p>
+          </div>
+        ))}
+      </section>
 
       {notice ? (
         <p className="mb-6 border border-green-300 bg-green-50 p-4 text-sm text-green-900">
@@ -389,9 +418,12 @@ export default async function MembersAdminPage({
         </ul>
       </section>
 
-      <div className="mt-10 flex gap-6 text-sm">
+      <div className="mt-10 flex flex-wrap gap-6 text-sm">
         <Link className="underline" href="/internal">
           ← Member area
+        </Link>
+        <Link className="underline" href="/internal/library">
+          Members&apos; library
         </Link>
         <Link className="underline" href="/membership">
           Membership page

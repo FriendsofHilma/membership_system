@@ -113,10 +113,19 @@ export default async function InternalPrototypePage() {
             )}
           </div>
 
-          <p className="text-sm text-neutral-700">
-            This is a placeholder for protected content. Membership gating is
-            enforced on the server, not only in the UI.
-          </p>
+          <div className="border border-black/15 bg-[#faf8f3] p-6">
+            <h3 className="mb-2 text-lg font-semibold">Members&apos; library</h3>
+            <p className="mb-4 text-sm leading-relaxed text-neutral-700">
+              The protected reading room with the Cosmic Block plates. Access is
+              enforced on the server, not only in the UI.
+            </p>
+            <Link
+              className="inline-block border border-black bg-black px-5 py-2 text-[11px] font-semibold tracking-[0.15em] text-white uppercase hover:bg-neutral-800"
+              href="/internal/library"
+            >
+              Enter the library
+            </Link>
+          </div>
 
           {session?.isAdmin ? (
             <p className="text-sm">
