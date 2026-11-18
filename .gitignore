@@ -1,0 +1,30 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# local prototypes
+/.data/
+/tools/dfri-verifier/certs/
+
+# secrets and certificates
+.env
+.env*.local
+*.pem
+*.p12
+*.csr.pem
+*.srl
+
+# typescript
+*.tsbuildinfo
+
+# misc
+.DS_Store
+.idea
+npm-debug.log*
